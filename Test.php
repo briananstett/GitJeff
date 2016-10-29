@@ -14,18 +14,35 @@
 
 
 <!DOCTYPE html>
+
+
+<?php $pageid = 'game'; include('../../TheQuestion.php');?>
+
 <html>
 	<head>
 		<title>Geek Runner</title>
 		<style>
 			canvas {
-		    border: 1px solid #d3d3d3;
-		    background-color: #f1f1f1;
-		    width:90%;height:100%;
-		    left:5%;
-		    position: relative;
-		    top:40px;
-		}
+			    border: 1px solid #d3d3d3;
+			    background-color: #f1f1f1;
+			    position: relative;
+			    width:80%;
+			    left:10%;
+			    top:40px;
+			}
+			.scorebutton{
+			    position: absolute;
+			    top: 7%;
+			    left:10.5%;
+			    width:80px;
+			}
+			.picupsbutton{
+			    position: absolute;
+			    top: 12%;
+			    left:10.5%;
+			    width:80px;
+			}
+		
 		</style>
 	</head>
 	<body onload = "init()">
@@ -61,11 +78,13 @@
 	
 	function update(){
 		viewPoint.camera(Jeff, myGame.context);
-		myGame.context.drawImage(garretBackground1,0,-120);
-		myGame.context.drawImage(garretBackground1,1918,-120);
-		myGame.context.drawImage(background2,0 , - 120);
-		myGame.context.drawImage(background1, 0, - 120);
+		myGame.context.drawImage(garretBackground1,0,-180);
 		Jeff.draw(myFloor,myFloor2);
+		
+		document.getElementById("display").innerHTML = "Your score is: " + highscore;
+		document.getElementById("pickups").innerHTML = "Your pickups amount is: " + pickups;
+		
+		
 	if(myFloor.visible){
 		myFloor.draw();
 	}
@@ -116,7 +135,7 @@
 	background8 = new Image;
 		background8.src = "images/city/layer_08_1920 x 1080.png";
 	var garretBackground1 = new Image;
-		garretBackground1.src = "images/background_1.png";
+		garretBackground1.src = "images/Level_1_v2.png";
 	var CitypngArray = ["images/city/layer_01_1920 x 1080.png",
 				"images/city/layer_02_1920 x 1080.png",
 				"images/city/layer_03_1920 x 1080.png",
@@ -138,6 +157,7 @@
 			viewPoint.x2Point += 6;
 			viewPoint.viewPointClearStart +=6;
 			myGame.context.translate(- 6,0);
+			updatehighscore();
 		},
 		moveCameraLeft : function(){
 			viewPoint.x1Point -= 6;
@@ -164,12 +184,34 @@
 		
 	}
 
-	
+	function SaveCurrentScoreToCookie(){
+		
+		alert(highscore);
+		
+		document.cookie = 'PlayerScore=' + highscore;
+	}
 
     
 
 
 	</script>
+	
+	<?php include('../../scroll.php'); ?>
+	
+	<div class='scorebutton'>
+		<a type="button" id="display" class=" btn btn-primary btn-sm "><span class=" " aria-hidden="true"></span> </a> 
+
+	</div>
+	<div class='picupsbutton'>
+		<a type="button" id="pickups" class=" btn btn-primary btn-sm "><span class="" aria-hidden="true"></span>  </a> 
+
+	</div>			
+	
+	<div class='exitbutton'>
+	  <a href="../../AskTheQuestion.php" type="button" onclick="SaveCurrentScoreToCookie()" class=" btn btn-danger btn-sm "><span class=" " aria-hidden="true"></span> X </a> 
+	</div>		
+	
+	
 	</body>
 	
 	
