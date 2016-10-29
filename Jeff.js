@@ -10,8 +10,11 @@
 		this.height = options.height; //height of the ENTIRE sprite page
 		this.imageRight = options.imageRight; //the actual image of the sprite
 		this.imageLeft = options.imageLeft;
+		this.imageStandLeft= options.imageStandLeft;
+		this.imageStandRight = options.imageStandRight;
 		this.yaxis = options.yaxis;
 		this.xaxis= options.xaxis; 
+		this.lastDirrection = "right";
 		//*********************************
 		this.defaultSpeed = 6; //x movement speed
 		this.gravity = 0.15;
@@ -20,13 +23,20 @@
 		this.jumpVelocity = 0;
 		this.jumpSpeed = -9
 		this.visible = true;
+		this.jumpRight = new Image;
+			this.jumpRight.src = "images/jumping_right.png";
+		this.jumpLeft = new Image;
+			this.jumpLeft.src = "images/jumping_left.png";
+		this.standingRight = new Image;
+			this.standingRight.src = "images/stand_right.png";
+		this.standingLeft = new Image;
+			this.standingLeft.src = "images/stand_left.png";
 		
 		
-		
-		this.spriteUpdateDraw = function(direction){
+		this.spriteUpdateDraw = function(direction){//based off of direction, draw different sprites
 			if (direction){
 		    	this.tickCount +=1;
-        			if (this.tickCount > this.ticksPerFrame){
+        			if (this.tickCount > this.ticksPerFrame){//mech for moving through sprite annimations within sprite image
         				this.tickCount = 0;
         				if (this.frameindex < this.numberOffFrames - 1){
         					this.frameindex +=1;	
@@ -34,79 +44,61 @@
         					this.frameindex = 0;
         				}
         			}
-			    
-			}
-			//****************************************************
-			if(direction == "left"){
-				this.context.drawImage(
-				this.imageLeft,
-				//new 
-				this.frameindex * this.width / this.numberOffFrames,
-				0,
-				this.width /this.numberOffFrames,
-				this.height,
-				this.xaxis,
-				this.yaxis,
-				this.width / this.numberOffFrames,
-				this.height
-				);
-				
-			}else if (direction == "right"){
-				this.context.drawImage(
-				this.imageRight,
-				//new 
-				this.frameindex * this.width / this.numberOffFrames,
-				0,
-				this.width /this.numberOffFrames,
-				this.height,
-				this.xaxis,
-				this.yaxis,
-				this.width / this.numberOffFrames,
-				this.height
-				);
-			}else if (direction == "jump"){
-			    this.context.drawImage(
-				this.imageRight,
-				//new 
-				this.frameindex * this.width / this.numberOffFrames,
-				0,
-				this.width /this.numberOffFrames,
-				this.height,
-				this.xaxis,
-				this.yaxis,
-				this.width / this.numberOffFrames,
-				this.height
-				);
-			}else{
-		    	this.context.drawImage(
-    				this.imageRight,
-    				//new 
-    				this.frameindex * this.width / this.numberOffFrames,
-    				0,
-    				this.width /this.numberOffFrames,
-    				this.height,
-    				this.xaxis,
-    				this.yaxis,
-    				this.width / this.numberOffFrames,
-    				this.height
-				);
+				if(direction == "left"){//if direction left move through sprite-moving-left.pic
+					this.context.drawImage(
+					this.imageLeft,
+					this.frameindex * this.width / this.numberOffFrames,
+					0,
+					this.width /this.numberOffFrames,
+					this.height,
+					this.xaxis,
+					this.yaxis,
+					this.width / this.numberOffFrames,
+					this.height
+					);
+				}else if (direction == "right"){//if direction right move through sprite-moving-right.pic
+					this.context.drawImage(
+					this.imageRight,
+					//new 
+					this.frameindex * this.width / this.numberOffFrames,
+					0,
+					this.width /this.numberOffFrames,
+					this.height,
+					this.xaxis,
+					this.yaxis,
+					this.width / this.numberOffFrames,
+					this.height
+					);
+				}else if (direction == "jump"){//if direction jump determine which direction to jump
+					if(this.lastDirrection == "right"){//if we are facing right, draw jump-right
+						this.context.drawImage(this.jumpRight,this.xaxis, this.yaxis);	
+					}else{//if we are facing left, draw jump left
+						this.context.drawImage(this.jumpLeft,this.xaxis, this.yaxis);
+					}
+				    
+				 }
+			}else{//updatesprite was called but no value was passed
+				if(this.lastDirrection == "right"){//if facing right draw standing right
+					this.context.drawImage(this.standingRight, this.xaxis, this.yaxis);	
+				}else{//if facing left draw standing left
+					this.context.drawImage(this.standingLeft, this.xaxis, this.yaxis);	
+				}
 			}
 		};
 		
 		
 		this.gravityFunction = function(){
-		    if (this.yaxis + this.height >(myGame.canvas.height - 30)){
-				//hit bottom
-				 if (this.allowJump == false){
+		    if (this.yaxis + this.height >(myGame.canvas.height - 30)){//hit rock bottom
+				 if (this.allowJump == false){//just hit the ground, stop gravity, allow jump
 				 	this.gravitySpeed = 0;
 				 	this.jumpVelocity = 0;
 				 	this.allowJump = true;
 				}
-				 if (this.allowJump){
+				 if (this.allowJump){//been on the ground for at least one frame, allow to jump
 					this.gravitySpeed = 0;
 				}
 				
-			} else{
+			} else{//in the air some where
 				this.gravitySpeed += this.gravity;
 				 this.spriteUpdateDraw("jump");
 			}
@@ -146,13 +138,13 @@
 			this.yspeed =0;
 		    if (myGame.keys && myGame.keys[37]) {
 		    	if(this.allowJump){
-		        	this.spriteUpdateDraw("left");
+		    		this.lastDirrection = "left";
 		    	}
 		    	this.xspeed = - this.defaultSpeed;
 			}
-			if (myGame.keys && myGame.keys[39]) {
+			 if (myGame.keys && myGame.keys[39]) {
 		    	if(this.allowJump){
-		        	this.spriteUpdateDraw("right");
+		    		this.lastDirrection = "right";
 		    	}
 			    this.xspeed = this.defaultSpeed;
 			    }
@@ -161,12 +153,19 @@
 				 	this.jump();
 				  	this.allowJump = false;
 				 }
-			}else{ this.spriteUpdateDraw();}
+			}
+		
+			if(this.allowJump && myGame.keys &&  ( myGame.keys[37] || myGame.keys[39]))
+				this.spriteUpdateDraw(this.lastDirrection);
+			else{ 
+				if(this.allowJump){
+					this.spriteUpdateDraw();
+				}
+			}
 		    this.xaxis += this.xspeed;
 			this.yaxis += this.yspeed + this.gravitySpeed + this.jumpVelocity;
 			if(arguments.length >0){
 				for (i=0;i<arguments.length;i++){
-						//console.log(this.collision(arguments[i]));\
 						if(this.collision(arguments[i])){
 							console.log(this.collision(arguments[i]));
 							arguments[i].visible = false;
