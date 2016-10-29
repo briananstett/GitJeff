@@ -81,6 +81,10 @@
 		JeffImageRight.src = "images/Jeff_running_v1.png";
 	JeffImageLeft = new Image;
 		JeffImageLeft.src = "images/Jeff_running_v1_left.png";
+	StandLeft = new Image;
+		StandLeft.sr = "images/stand_left.png";
+	StandRight = new Image;
+		StandRight.sr = "images/stand_right.png";
 	
 	Jeff = new Jeff({
 		context: myGame.canvas.getContext("2d"),
@@ -88,6 +92,8 @@
 		height: 189,
 		imageRight: JeffImageRight,
 		imageLeft: JeffImageLeft,
+		imageStandLeft: StandLeft,
+		imageStandRight: StandRight,
 		numberOfFrames: 4,
 		ticksPerFrame: 15,
 		xaxis: 900,
