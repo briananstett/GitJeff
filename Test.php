@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 
 
-<?php $pageid = 'game'; include('../../TheQuestion.php');?>
+<?php $pageid = 'game'; include('../../TheQuestion.php');  ?>
 
 <html>
 	<head>
@@ -97,9 +97,9 @@
 	myFloor = new floor(400,400,400,100);//Main platform -> testing collision
 	myFloor2 = new floor(600,400,100,100);//Main platform -> testing collision
 	JeffImageRight = new Image;
-		JeffImageRight.src = "images/Jeff_running_v1.png";
+		JeffImageRight.src = "images/spritegrid_jeff_v1.png";
 	JeffImageLeft = new Image;
-		JeffImageLeft.src = "images/Jeff_running_v1_left.png";
+		JeffImageLeft.src = "images/spritegrid_jeff_v1_left.png";
 	StandLeft = new Image;
 		StandLeft.sr = "images/stand_left.png";
 	StandRight = new Image;
@@ -107,8 +107,8 @@
 	
 	Jeff = new Jeff({
 		context: myGame.canvas.getContext("2d"),
-		width: 522,
-		height: 189,
+		width: 600,
+		height: 200,
 		imageRight: JeffImageRight,
 		imageLeft: JeffImageLeft,
 		imageStandLeft: StandLeft,
@@ -188,7 +188,12 @@
 		
 		alert(highscore);
 		
-		document.cookie = 'PlayerScore=' + highscore;
+		EddyHighscore = highscore;
+		
+		document.cookie = 'EddyHighscore='+EddyHighscore;
+		
+		
+
 	}
 
     
