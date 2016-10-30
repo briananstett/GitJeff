@@ -160,7 +160,7 @@
 			viewPoint.x2Point += 6;
 			viewPoint.viewPointClearStart +=6;
 			myGame.context.translate(- 6,0);
-			//updatehighscore();                         for some reason, this is causing the game to lag? know why?
+			//updatehighscore();     This is causing lag on camera motion                   
 		},
 		moveCameraLeft : function(){
 			viewPoint.x1Point -= 6;
