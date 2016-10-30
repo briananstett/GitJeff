@@ -16,7 +16,10 @@
 <!DOCTYPE html>
 
 
-<?php $pageid = 'game'; include('../../TheQuestion.php');  ?>
+<?php $pageid = 'game'; include('../../TheQuestion.php'); ?>
+
+
+
 
 <html>
 	<head>
@@ -157,7 +160,7 @@
 			viewPoint.x2Point += 6;
 			viewPoint.viewPointClearStart +=6;
 			myGame.context.translate(- 6,0);
-			updatehighscore();
+			//updatehighscore();                         for some reason, this is causing the game to lag? know why?
 		},
 		moveCameraLeft : function(){
 			viewPoint.x1Point -= 6;
@@ -186,11 +189,11 @@
 
 	function SaveCurrentScoreToCookie(){
 		
-		alert(highscore);
+		//alert(highscore);
 		
-		EddyHighscore = highscore;
-		
-		document.cookie = 'EddyHighscore='+EddyHighscore;
+		//EddyHighscore = highscore
+		//document.cookie = 'EddyHighscore='+EddyHighscore;
+		document.cookie="EddyHighscore= " + highscore + ";path=/";
 		
 		
 
