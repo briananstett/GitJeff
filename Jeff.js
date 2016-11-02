@@ -1,5 +1,5 @@
 	var Jeff = function(options){
-		//options you must send are ticks per frame, number of frames, context, width, height, image
+		//Jeff's sprite properties
 		this.frameindex = 0;
 		this.tickCount = 0;
 		this.ticksPerFrame= options.ticksPerFrame; // how man ticks before changing frame
@@ -8,14 +8,10 @@
 		this.width = options.width; // width of the ENTIRE sprite page
 		this.fakeWidth = this.width/ this.numberOffFrames; //"Camera ready width" the width of any given frame in the sprite
 		this.height = options.height; //height of the ENTIRE sprite page
-		this.imageRight = options.imageRight; //the actual image of the sprite
-		this.imageLeft = options.imageLeft;
-		this.imageStandLeft= options.imageStandLeft;
-		this.imageStandRight = options.imageStandRight;
 		this.yaxis = options.yaxis;
 		this.xaxis= options.xaxis; 
 		this.lastDirrection = "right";
-		//*********************************
+		//**************Jeff's movement properties
 		this.defaultSpeed = 6; //x movement speed
 		this.gravity = 0.15;
 		this.gravitySpeed =0;
@@ -23,6 +19,7 @@
 		this.jumpVelocity = 0;
 		this.jumpSpeed = -9
 		this.visible = true;
+        //Jeff's iamges
 		this.jumpRight = new Image;
 			this.jumpRight.src = "images/jumping_right.png";
 		this.jumpLeft = new Image;
@@ -31,6 +28,11 @@
 			this.standingRight.src = "images/stand_right.png";
 		this.standingLeft = new Image;
 			this.standingLeft.src = "images/stand_left.png";
+        this.imageRight = new Image;
+		  this.imageRight.src = "images/spritegrid_jeff_v1.png";
+        this.imageLeft = new Image;
+		  this.imageLeft.src = "images/spritegrid_jeff_v1_left.png";
+        
 		
 		
 		this.spriteUpdateDraw = function(direction){//based off of direction, draw different sprites
@@ -59,7 +61,6 @@
 				}else if (direction == "right"){//if direction right move through sprite-moving-right.pic
 					this.context.drawImage(
 					this.imageRight,
-					//new 
 					this.frameindex * this.width / this.numberOffFrames,
 					0,
 					this.width /this.numberOffFrames,

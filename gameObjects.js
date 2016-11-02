@@ -20,8 +20,6 @@
 			//set movement speed
 			if (myGame.keys && myGame.keys[37]) {this.xspeed = - this.defaultSpeed; }
 			if (myGame.keys && myGame.keys[39]) {this.xspeed = this.defaultSpeed; }
-			//if (myGame.keys && myGame.keys[38]) {this.yspeed = -4; }
-			//if (myGame.keys && myGame.keys[40]) {{this.yspeed = 3; }}
 			if (myGame.keys && myGame.keys[32]) {
 				 if(this.allowJump){
 					this.jump();
