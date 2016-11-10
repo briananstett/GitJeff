@@ -102,4 +102,35 @@
 			myGame.context.fillRect(this.xaxis,this.yaxis,this.width,this.height);	
 		}
 	}
+
+
+//level1 Background
+
+    function level1BackgroundObject(){
+        this.xaxis = 0;
+        this.yaxis = 0;
+        this.length = 9710;
+        this.height = 1080;
+        this.levelImage = new Image;
+            this.levelImage.src = "images/Level_1_v2.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.levelImage,0,-180);
+        }
+    }
+
+
+
+//Milk
+    function MikeMilk (x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        //this.width = width;
+        //this.height = height;
+        this.visible = true;
+        this.MilkImage = new Image;
+            this.MilkImage.src = "images/MikeMilk.png";
+        this.draw =function(){
+            myGame.context.drawImage(this.MilkImage,this.xaxis,this.yaxis);
+        }
+    }
 	

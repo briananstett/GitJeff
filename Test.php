@@ -23,7 +23,8 @@
 
 <html>
 	<head>
-		<title>Geek Runner</title>
+		<title>Jeff's Games</title>
+        <meta charset="utf-8"/>
 		<style>
 			canvas {
 			    border: 1px solid #d3d3d3;
@@ -58,12 +59,16 @@
 	var myGame = {
 		canvas : document.createElement("canvas"),
         level1 : {
-            garretBackground1 : new Image,
-            level1GamePieces : {},
+            level1GamePieces : {level1Background : new level1BackgroundObject, milk : new MikeMilk(60,470)},
             buildMap : function(){
-                //this functions builds the map level 1, which includes the background and
-                //and the other objects
+                //level1Background = new level1BackgroundObject;
+            },
+            levelMaker : function(){
+                myGame.level1.level1GamePieces.level1Background.draw();
+                myGame.level1.level1GamePieces.milk.draw();
+                //build and draw the other objects
             }
+            
         },
 		start : function() {
 			this.canvas.width= 1800;
@@ -84,12 +89,14 @@
 	
 	function init(){
 		myGame.start();
+        myGame.level1.buildMap();
 		
 	}
 	
 	function update(){
 		viewPoint.camera(Jeff, myGame.context);
-		myGame.context.drawImage(garretBackground1,0,-180);
+		//myGame.context.drawImage(garretBackground1,0,-180);
+        myGame.level1.levelMaker();
 		Jeff.draw(myFloor,myFloor2);
 		
 		//document.getElementById("display").innerHTML = "Your score is: " + highscore;
@@ -141,15 +148,16 @@
 			myGame.context.translate(6,0);
 		},
 		centerCamera : function(gameObject){
-			if(gameObject.xaxis <= viewPoint.x1Point){
+            
+			if(gameObject.xaxis <= viewPoint.x1Point && this.viewPointClearStart >0){
 				viewPoint.moveCameraLeft();
-			}else if((gameObject.xaxis + gameObject.fakeWidth) >= viewPoint.x2Point){
+			}else if((gameObject.xaxis + gameObject.fakeWidth) >= viewPoint.x2Point && (this.viewPointClearStart + 1920) < myGame.level1.level1GamePieces.level1Background.length){
 				viewPoint.moveCameraRight();
 			}
 		},
 		camera : function(gameObject, context){
 			viewPoint.centerCamera(gameObject);
-			context.clearRect(this.viewPointClearStart,0, (this.viewPointClearStart + 1900),900)
+			context.clearRect(this.viewPointClearStart,0, (this.viewPointClearStart + 1920),900)
 			
 		},
 		gameMaker : function (){
