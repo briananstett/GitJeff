@@ -134,4 +134,20 @@
             myGame.context.drawImage(this.MilkImage,this.xaxis,this.yaxis);
         }
     }
+
+
+//trashcan
+    function trashCan (x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width;
+        this.height;
+        this.visible = true;
+        this.charID = 90;
+        this.trashImage = new Image;
+            this.trashImage.src ="images/trashcan.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.trashImage, this.xaxis, this.yaxis);
+        }
+    }
 	
