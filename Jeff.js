@@ -134,7 +134,7 @@
     	}
 		
 		
-		this.draw = function(){
+		this.draw = function(gamePieceObject){
 		    this.xspeed = 0;
 			this.yspeed =0;
 		    if (myGame.keys && myGame.keys[37]) {
@@ -165,14 +165,20 @@
 			}
 		    this.xaxis += this.xspeed;
 			this.yaxis += this.yspeed + this.gravitySpeed + this.jumpVelocity;
-			if(arguments.length >0){
-				for (i=0;i<arguments.length;i++){
-						if(this.collision(arguments[i])){
-							console.log(this.collision(arguments[i]));
-							arguments[i].visible = false;
-						}
-				}
-			}
+             for (var key in gamePieceObject) {
+                    if (gamePieceObject.hasOwnProperty(key)) {
+                        if(this.collision(gamePieceObject[key])){
+                            if(this.collision(gamePieceObject[key]) >= 90){//Any bad objec that will end the game needs to have a charId 90 or higher
+                                myGame.stop();//game over
+                                console.log("Game Over!")
+                                //Place game over code here !=! 
+                            }
+                            console.log(this.collision(gamePieceObject[key]));
+                            gamePieceObject[key].visible = false;
+                            
+                        }
+			         }
+             }
 			this.gravityFunction();
 			
 		}

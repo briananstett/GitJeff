@@ -124,9 +124,10 @@
     function MikeMilk (x,y){
         this.xaxis = x;
         this.yaxis = y;
-        //this.width = width;
-        //this.height = height;
+        this.width = 57;
+        this.height = 130;
         this.visible = true;
+        this.charID = 3;
         this.MilkImage = new Image;
             this.MilkImage.src = "images/MikeMilk.png";
         this.draw =function(){

@@ -59,14 +59,18 @@
 	var myGame = {
 		canvas : document.createElement("canvas"),
         level1 : {
-            level1GamePieces : {level1Background : new level1BackgroundObject, milk : new MikeMilk(60,470)},
+            level1Background : new level1BackgroundObject,
+            level1GamePieces : {milk : new MikeMilk(600,720), milk1 : new MikeMilk(1000,720), mike2 : new MikeMilk(1400,720)},
             buildMap : function(){
-                //level1Background = new level1BackgroundObject;
             },
             levelMaker : function(){
-                myGame.level1.level1GamePieces.level1Background.draw();
-                myGame.level1.level1GamePieces.milk.draw();
-                //build and draw the other objects
+                myGame.level1.level1Background.draw();
+                for (var gameObject in myGame.level1.level1GamePieces){
+                    if(myGame.level1.level1GamePieces[gameObject].visible && viewPoint.inFrame(myGame.level1.level1GamePieces[gameObject])){
+                        myGame.level1.level1GamePieces[gameObject].draw();
+                    }
+                }
+                
             }
             
         },
@@ -83,7 +87,9 @@
     		window.addEventListener('keyup', function (e) {
         		myGame.keys[e.keyCode] = false; 
     		})
-		}
+		},
+        stop : function() {
+        clearInterval(this.interval); }
 		
 	}
 	
@@ -95,9 +101,8 @@
 	
 	function update(){
 		viewPoint.camera(Jeff, myGame.context);
-		//myGame.context.drawImage(garretBackground1,0,-180);
         myGame.level1.levelMaker();
-		Jeff.draw(myFloor,myFloor2);
+		Jeff.draw(myGame.level1.level1GamePieces);
 		
 		//document.getElementById("display").innerHTML = "Your score is: " + highscore;
 		//document.getElementById("pickups").innerHTML = "Your pickups amount is: " + pickups;
@@ -122,7 +127,7 @@
 		height: 200,
 		numberOfFrames: 4,
 		ticksPerFrame: 15,
-		xaxis: 900,
+		xaxis: 100,
 		yaxis: 30
 		})
     
@@ -134,10 +139,12 @@
 		x1Point : (1920 /2) - 600,
 		x2Point : (1920/2) + 600,
 		viewPointClearStart: 0,
+        viewPointClearEnd: 1920,
 		moveCameraRight: function(){
 			viewPoint.x1Point += 6;
 			viewPoint.x2Point += 6;
 			viewPoint.viewPointClearStart +=6;
+            viewPoint.viewPointClearEnd +=6;
 			myGame.context.translate(- 6,0);
 			//updatehighscore();     //his is causing lag on camera motion                   
 		},
@@ -145,13 +152,14 @@
 			viewPoint.x1Point -= 6;
 			viewPoint.x2Point -= 6;
 			viewPoint.viewPointClearStart -= 6;
+            viewPoint.viewPointClearEnd -= 6;
 			myGame.context.translate(6,0);
 		},
 		centerCamera : function(gameObject){
             
 			if(gameObject.xaxis <= viewPoint.x1Point && this.viewPointClearStart >0){
 				viewPoint.moveCameraLeft();
-			}else if((gameObject.xaxis + gameObject.fakeWidth) >= viewPoint.x2Point && (this.viewPointClearStart + 1920) < myGame.level1.level1GamePieces.level1Background.length){
+			}else if((gameObject.xaxis + gameObject.fakeWidth) >= viewPoint.x2Point && (this.viewPointClearStart + 1920) < myGame.level1.level1Background.length){
 				viewPoint.moveCameraRight();
 			}
 		},
@@ -164,7 +172,12 @@
 			var level1 = {};
             var level2 = {};
 			
-		}
+		},
+        inFrame :function (gamePiece){
+            if(gamePiece.xaxis >= this.viewPointClearStart && gamePiece.xaxis <= this.viewPointClearEnd){
+                return true;
+            }
+        }
 		
 	}
 
