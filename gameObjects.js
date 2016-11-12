@@ -140,8 +140,8 @@
     function trashCan (x,y){
         this.xaxis = x;
         this.yaxis = y;
-        this.width;
-        this.height;
+        this.width = 102;
+        this.height = 114;
         this.visible = true;
         this.charID = 90;
         this.trashImage = new Image;
@@ -150,4 +150,133 @@
             myGame.context.drawImage(this.trashImage, this.xaxis, this.yaxis);
         }
     }
+
+
+//WineBottle
+
+    function wineBottle(x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width = 90;
+        this.height = 160;
+        this.visible = true;
+        this.charID = 4;
+        this.bottleImage = new Image;
+            this.bottleImage.sr = "images/WineBottle.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.bottleImage, this.xaxis, this.yaxis);
+        }
+            
+    }
+
+
+//CecylingBin
+
+    function recylingBin(x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width = 146;
+        this.height = 115;
+        this.visible = true;
+        this.charID =5;
+        this.binImage = new Image;
+            this.binImage.src = "images/recyclingbin.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.binImage, this.xaxis, this.yaxis);   
+        }
+    }
+
+
+//pizza
+    function pizzaBox(x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width = 129;
+        this.height = 105;
+        this.visible = true;
+        this.charID =6;
+        this.pizzaBoxImage = new Image;
+            this.pizzaBoxImage.src = "images/PizzaBox.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.pizzaBoxImage, this.xaxis, this.yaxis);   
+        }
+    }
+
+//newspaper 
+
+    function newsPaper(x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width = 132;
+        this.height = 131;
+        this.visible = true;
+        this.charID =7;
+        this.newsPaperImage = new Image;
+            this.newsPaperImage.src = "images/PizzaBox.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.newsPaperImage, this.xaxis, this.yaxis);   
+        }
+    }
+
+//dumpster
+    function dumpster(x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width = 154;
+        this.height = 146;
+        this.visible = true;
+        this.charID =8;
+        this.dumpsterImage = new Image;
+            this.dumpsterImage.src = "images/dumpster.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.dumpsterImage, this.xaxis, this.yaxis);   
+        }
+    }
+
+
+//BagOfCans
+
+    function bagOfCans(x,y){
+        this.xaxis = x;
+        this.yaxis = y;
+        this.width = 154;
+        this.height = 146;
+        this.visible = true;
+        this.charID =9;
+        this.bagOfCansImage = new Image;
+            this.bagOfCansImage.src = "images/BagOfCans.png";
+        this.draw = function(){
+            myGame.context.drawImage(this.bagOfCansImage, this.xaxis, this.yaxis);   
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	

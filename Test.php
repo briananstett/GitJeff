@@ -60,7 +60,7 @@
 		canvas : document.createElement("canvas"),
         level1 : {
             level1Background : new level1BackgroundObject,
-            level1GamePieces : {milk : new MikeMilk(600,720), milk1 : new MikeMilk(1000,720), mike2 : new MikeMilk(1400,720), trash : new trashCan(3000,720)},
+            level1GamePieces : {milk : new MikeMilk(600,720), milk1 : new MikeMilk(1000,720), mike2 : new MikeMilk(1400,720),trash : new trashCan(3000,720)},
             buildMap : function(){
             },
             levelMaker : function(){
@@ -69,11 +69,12 @@
                     if(myGame.level1.level1GamePieces[gameObject].visible && viewPoint.inFrame(myGame.level1.level1GamePieces[gameObject])){
                         myGame.level1.level1GamePieces[gameObject].draw();
                     }
-                }
-                
-            }
+                } 
+            },
+            finishLine : 9660,
             
         },
+        currentLevel :1,
 		start : function() {
 			this.canvas.width= 1800;
 			this.canvas.height= 885;
@@ -101,19 +102,20 @@
 	
 	function update(){
 		viewPoint.camera(Jeff, myGame.context);
-        myGame.level1.levelMaker();
-		Jeff.draw(myGame.level1.level1GamePieces);
+ 
+        if(myGame.currentLevel ==1){
+            myGame.level1.levelMaker();
+            Jeff.draw(myGame.level1.level1GamePieces);
+            if(Jeff.xaxis >= myGame.level1.finishLine){
+                cashIn();
+            }
+        }
+        
 		
 		//document.getElementById("display").innerHTML = "Your score is: " + highscore;
 		//document.getElementById("pickups").innerHTML = "Your pickups amount is: " + pickups;
 		
 		
-        if(myFloor.visible){
-            myFloor.draw();
-        }
-        if(myFloor2.visible){
-            myFloor2.draw();
-        }
 	}
 	
 	brian = new dude(); //Main Character
@@ -136,8 +138,8 @@
 	
 	
 	var viewPoint ={
-		x1Point : (1920 /2) - 600,
-		x2Point : (1920/2) + 600,
+		x1Point : (1920 /2) - 500,
+		x2Point : (1920/2) + 400,
 		viewPointClearStart: 0,
         viewPointClearEnd: 1920,
 		moveCameraRight: function(){
@@ -180,6 +182,12 @@
         }
 		
 	}
+    
+    function cashIn(){
+        for(var item =0; item <Jeff.inventory.length;item++){
+            console.log(Jeff.inventory[item]);
+        }
+    }
 
 	function SaveCurrentScoreToCookie(){
 		

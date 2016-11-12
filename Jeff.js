@@ -32,7 +32,8 @@
 		  this.imageRight.src = "images/spritegrid_jeff_v1.png";
         this.imageLeft = new Image;
 		  this.imageLeft.src = "images/spritegrid_jeff_v1_left.png";
-        
+        //jeff's Backpack
+        this.inventory = [];
 		
 		
 		this.spriteUpdateDraw = function(direction){//based off of direction, draw different sprites
@@ -174,6 +175,7 @@
                                 //Place game over code here !=! 
                             }
                             console.log(this.collision(gamePieceObject[key]));
+                            this.inventory.push(gamePieceObject[key].charID);
                             gamePieceObject[key].visible = false;
                             
                         }
@@ -182,5 +184,11 @@
 			this.gravityFunction();
 			
 		}
+        
+        
+        this.inventoryReset = function(){
+            //resests the inveroty after level completion
+            this.inventory =[];
+        }
 	}
 	
