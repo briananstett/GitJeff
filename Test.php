@@ -60,7 +60,7 @@
 		canvas : document.createElement("canvas"),
         level1 : {
             level1Background : new level1BackgroundObject,
-            level1GamePieces : {milk : new MikeMilk(600,720), milk1 : new MikeMilk(1000,720), mike2 : new MikeMilk(1400,720),trash : new trashCan(3000,720)},
+            level1GamePieces : {milk : new MikeMilk(600,720), milk1 : new MikeMilk(1000,720), mike2 : new MikeMilk(1400,720),mike3 : new MikeMilk(2500,720),mike4 : new MikeMilk(4000,720),mike5 : new MikeMilk(5000,720),trash : new trashCan(3000,720)},
             buildMap : function(){
             },
             levelMaker : function(){
